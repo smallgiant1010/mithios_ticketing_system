@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const authRouter = require("./routers/authRouter");
 const ticketRouter = require("./routers/ticketRouter");
 const fileRouter = require("./routers/fileRouter");
+const cors = require("cors");
 require("dotenv").config();
 
 // Initializations
@@ -19,6 +20,10 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log("Connected To " +
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}));
 
 // Routes
 app.head("/", (_, res) => res.status(200));

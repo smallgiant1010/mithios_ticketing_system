@@ -129,14 +129,14 @@ const patchNewPassword = async (req, res) => {
     const removal = await Account.findOneAndDelete({ username: "dummy" });
   } catch(err) {
     const errors = errorHandler(err);
-    return  res.status(400).json(errors);
+    return res.status(400).json(errors);
   }
   try {
     const user = await Account.findOneAndUpdate({ username }, { $set: { password: newPassword } }, { runValidators: true, context: "query" });
     res.status(200).json({ id: user._id });
   } catch(err) {
-    console.log(err.message);
-    res.status(500).json({ error: "Something Went Wrong While Updating the Password" });
+    const errors = errorHandler(err);
+    res.status(500).json(errors);
   }
 };
 
