@@ -38,6 +38,9 @@ const ticketSchema = new mongoose.Schema({
     type: String,
     required: [true, "The User Name Is Missing"],
   },
+  resolved: {
+    type: Boolean,
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model("ticket", ticketSchema);

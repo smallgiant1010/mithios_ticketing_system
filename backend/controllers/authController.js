@@ -95,7 +95,8 @@ const getUserInfo = (req, res) => {
 };
 
 const postResetPassword = (req, res) => {
-  const { email } = req.query.email;
+  const { email } = req.query;
+  console.log(email);
   const randomCode = Math.floor(Math.random() * (MAXCODE - MINCODE + 1) + MINCODE);
   const transporter = nodemailer.createTransport({
     service: process.env.SERVICE,
@@ -123,16 +124,16 @@ const postResetPassword = (req, res) => {
 };
 
 const patchNewPassword = async (req, res) => {
-  const { username, newPassword } = req.body;
+  const { email, newPassword } = req.body;
   try {
-    const dummy = await Account.create({ username: "dummy", email: "dummy@dummy.dum", password: newPassword, role: "Dummy" });
+    const dummy = await Account.create({ username: "dummy", email: "dummy@dummy.dum", password: newPassword, role: "Programmer" });
     const removal = await Account.findOneAndDelete({ username: "dummy" });
   } catch(err) {
     const errors = errorHandler(err);
     return res.status(400).json(errors);
   }
   try {
-    const user = await Account.findOneAndUpdate({ username }, { $set: { password: newPassword } }, { runValidators: true, context: "query" });
+    const user = await Account.findOneAndUpdate({ email }, { $set: { password: newPassword } }, { runValidators: true, context: "query" });
     res.status(200).json({ id: user._id });
   } catch(err) {
     const errors = errorHandler(err);

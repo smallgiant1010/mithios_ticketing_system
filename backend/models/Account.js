@@ -6,7 +6,7 @@ const accountSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, "Please Enter A Username"],
-    unique: [true, "That Username Is Already In Use"],
+    unique: true,
   },
   email: {
     type: String,
@@ -15,7 +15,8 @@ const accountSchema = new mongoose.Schema({
       validator: (v) => {
         return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v);
       },
-      message: "Please Enter A Valid Email Address", }
+      message: "Please Enter A Valid Email Address", 
+    }
   },
   password: {
     type: String,
@@ -39,7 +40,7 @@ const accountSchema = new mongoose.Schema({
     required: [true, "Please Mention Which Role You Hold"],
     enum: {
       values: ["Programmer", "Artist", "Manager"],
-      message: ["Please Assign Yourself A Role"],
+      message: "Please Assign Yourself A Role",
     },
   },
 });

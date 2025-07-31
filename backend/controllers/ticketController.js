@@ -107,7 +107,7 @@ const deleteSpecificTicket = async (req, res) => {
       return res.status(404).json({ error: `Ticket ${id} Not Found` });
     }
     authenticateTicketUser(ticket, username, _id);
-    const removedTicket = await Ticket.findByIdAndDelete(id).lean();
+    const removedTicket = await Ticket.findByIdAndUpdate(id, { $set: { resolved: true } }).lean();
     res.status(200).json({ id: removedTicket._id });
   } catch(err) { 
     const errors = errorHandler(err);
