@@ -26,6 +26,7 @@ export const useLogin = () => {
         setErrors(data);
       } else {
         setErrors(null);
+        localStorage.setItem("user", JSON.stringify(data));
         dispatch({ type: "LOGIN", payload: data });
       }
     } catch(e) {

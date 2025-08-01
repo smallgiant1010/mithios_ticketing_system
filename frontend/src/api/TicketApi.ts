@@ -4,18 +4,14 @@ export const postTicket = async (formData: FormData) => {
     credentials: "include",   
     body: formData
   });
-
-  return response.json();
+ 
+  return {
+    ...response.json(),
+    status: response.status,  
+  };
 }
 
-type Filter = {
-  query: string;
-  sortType: string;
-  order: number;
-  page: number;
-}
-
-export const getTickets = async (filter: Filter) => {
+export const getTickets = async (filter: FileFilter) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/getPage`, {
     credentials: "include",
     headers: {
@@ -24,37 +20,43 @@ export const getTickets = async (filter: Filter) => {
     body: JSON.stringify(filter),
   });
 
-  return response.json();
+  return {
+    ...response.json(),
+    status: response.status,  
+  };
 }
 
 export const getSpecificTicket = async (id: string) => { 
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/getSpecific?${id}`, {
     credentials: "include",
   });
-  
-  return response.json();
+    
+  return {
+    ...response.json(),
+    status: response.status,  
+  };
 }
 
 export const getUserTickets = async () => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/user`, {
     credentials: "include",
   });
-
-  return response.json();
+ 
+  return {
+    ...response.json(),
+    status: response.status,  
+  };
 }
 
 export const deleteTicket = async (id: string) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/remove?${id}`, {
     credentials: "include",
   });
-  
-  return response.json();
-}
-
-type Modifications = {
-  title: string;
-  priority: number;
-  team: string;
+   
+  return {
+    ...response.json(),
+    status: response.status,  
+  };
 }
 
 export const updateTicket = async (id: string, mods: Modifications ) => {
@@ -67,5 +69,9 @@ export const updateTicket = async (id: string, mods: Modifications ) => {
     body: JSON.stringify(mods),
   });
 
-  return response.json();
+
+  return {
+    ...response.json(),
+    status: response.status,  
+  };
 }

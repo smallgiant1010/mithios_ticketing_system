@@ -19,6 +19,7 @@ export default function useLogout() {
         setErrors(data["error"]);
       } else {
         setErrors("");
+        localStorage.removeItem('user');
         dispatch({ type: "LOGOUT" });
       }
     } catch(e) {

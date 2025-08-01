@@ -9,19 +9,19 @@ import ContentLayout from "./pages/ContentLayout";
 import Profile from "./components/Profile";
 
 function App() {
+  const user = localStorage.getItem("user");
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AuthLayout />}>
-          <Route path="/" element={<Navigate to="/login" replace />}/> 
+          <Route path="/" element={<Navigate to={user ? "/profile" : "/login"} replace />}/> 
           <Route path="/login" element={<Login />} /> 
           <Route path="/code" element={<Authenticate />} />
           <Route path="/reset" element={<ResetPassword />} />
         </Route>
         <Route element={<ContentLayout />}>
-{/*          <Route path="/tickets" element={<Tickets />}>
-            <Route path="pages/:pageNumber" element={<TicketPage />} />
-          </Route>
+{/*          <Route path="/tickets/page/:pageNumber" element={<Tickets />}>
           <Route path="/drive" element={<Drive />}>
             <Route path="pages/:pageNumber" element={<DrivePage />} />
           </Route>

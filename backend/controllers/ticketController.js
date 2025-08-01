@@ -65,7 +65,7 @@ const getPageOfTickets = async (req, res) => {
     const conditions = FIELDS.map((field) => ({
       [field]: { $regex: `/${query}/i` }
     }));
-    const tickets = await Ticket.find({ $or: conditions }).skip((page - 1) * 20).limit(20).sort( { sortType: order } )
+    const tickets = await Ticket.find({ $or: conditions }, { image_str: 0, issued_user_id: 0, createdAt: 0 }).skip((page - 1) * 20).limit(20).sort( { sortType: order } )
     res.status(200).json(tickets);
   } catch (err) {
     res.status(500).json({ error: err.message });

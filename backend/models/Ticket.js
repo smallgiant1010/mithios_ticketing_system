@@ -5,6 +5,9 @@ const ticketSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter A Title For This Ticket"],
   },
+  description: {
+    type: String,
+  },
   image_str: {
     type: [String],
     validate: [{

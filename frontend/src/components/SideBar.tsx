@@ -21,7 +21,7 @@ export default function SideBar() {
     },];
 
   return (<aside>
-    {tabs.map((tab, idx) => <Tab data={tab} />)}
+    {tabs.map((tab, idx) => <Tab key={idx} data={tab} />)}
   </aside>)
 }
 

@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { useEffect, createContext, useReducer } from 'react';
 import type { ReactNode, Dispatch } from 'react';
 
 type State = {
@@ -37,6 +37,17 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     username: "",
     id: "",
   });
+
+  useEffect(() => {
+    const [name] = document.cookie.split("; ")[0].split("=");
+    if(name === "jwt") {
+      const data = localStorage.getItem("user");
+      if(data) {
+        const user = JSON.parse(data);
+        dispatch({ type: "LOGIN", payload: user });
+      }
+    }
+  }, []);
 
   return (<AuthContext.Provider value={{...state, dispatch}}>
       {children}
