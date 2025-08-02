@@ -1,15 +1,16 @@
-export const postSignup = async (...UserData) => {
+export const postSignup = async (userData: UserData) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/auth/signup`, {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(userData),
   });
 
+  const data = await response.json();
   return {
-    ...response.json(),
+    ...data,
     status: response.status,  
   };
 }
@@ -19,8 +20,9 @@ export const getUserInfo = async () => {
     credentials: "include",
   });
   
+  const data = await response.json();
   return {
-    ...response.json(),
+    ...data,
     status: response.status,  
   };
 }

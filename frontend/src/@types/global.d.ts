@@ -16,10 +16,12 @@ declare global {
   type TicketFilter = FileFilter & {
     sortType: string;
     order: number;
+    active: boolean;
   }
 
   type Modifications = {
     title: string;
+    description: string;
     priority: number;
     team: string;
   }
@@ -28,6 +30,7 @@ declare global {
     _id: string;
     issued_user: string;
     updatedAt: Date;
+    resolved: boolean;
   }
 
   type TicketDetails = TicketPreview & {

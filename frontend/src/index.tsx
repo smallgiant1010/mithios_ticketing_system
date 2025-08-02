@@ -4,6 +4,7 @@ import './styles/index.css';
 import App from './App';
 import { AuthContextProvider } from './context/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { DisplayContextProvider } from './context/DisplayContext';
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>  
-        <App />
+        <DisplayContextProvider>
+          <App />
+        </DisplayContextProvider>
       </AuthContextProvider>
     </QueryClientProvider>
   </React.StrictMode>

@@ -7,6 +7,7 @@ import Authenticate from "./components/Authenticate";
 import ResetPassword from "./components/ResetPassword";
 import ContentLayout from "./pages/ContentLayout";
 import Profile from "./components/Profile";
+import Tickets from "./components/Tickets";
 
 function App() {
   const user = localStorage.getItem("user");
@@ -21,10 +22,8 @@ function App() {
           <Route path="/reset" element={<ResetPassword />} />
         </Route>
         <Route element={<ContentLayout />}>
-{/*          <Route path="/tickets/page/:pageNumber" element={<Tickets />}>
-          <Route path="/drive" element={<Drive />}>
-            <Route path="pages/:pageNumber" element={<DrivePage />} />
-          </Route>
+          <Route path="/tickets" element={<Tickets />} />
+{/*          <Route path="/drive" element={<Drive />} />
           <Route path="/members" element={<Members />} />
           <Route path="/phases" element={<Phases />} />*/}
           <Route path="/profile" element={<Profile />} />

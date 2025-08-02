@@ -63,12 +63,12 @@ const removeFile = async (req, res) => {
 } 
 
 const getPageOfFiles = async (req, res) => {
-  const { query, page } = req.body;
+  const { query, page } = req.query;
   try {
-    const conditions = ["metadata.phase", "filename"].map(field => ({
-      [field]: { $regex: `/${query}/` , $options: "i" }
+    const conditions = ["metadata.phase", "filename", "metadata.username", "metadata.user_id"].map(field => ({
+      [field]: { $regex: query , $options: "i" }
     }));
-    const cursor = gfs.find({ $or: conditions }).skip((page - 1) * 20).limit(20).sort( { uploadDate: 1 } );
+    const cursor = gfs.find({ $or: conditions }).sort( { uploadDate: -1 } ).skip((parseInt(page) - 1) * 20).limit(20);
     const metadata = await cursor.toArray();
     res.status(200).json(metadata);
   } catch(err) {

@@ -39,13 +39,10 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    const [name] = document.cookie.split("; ")[0].split("=");
-    if(name === "jwt") {
-      const data = localStorage.getItem("user");
-      if(data) {
-        const user = JSON.parse(data);
-        dispatch({ type: "LOGIN", payload: user });
-      }
+    const data = localStorage.getItem("user");
+    if (data) {
+      const user = JSON.parse(data);
+      dispatch({ type: "LOGIN", payload: user });
     }
   }, []);
 

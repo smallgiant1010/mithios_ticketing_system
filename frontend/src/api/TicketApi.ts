@@ -5,23 +5,22 @@ export const postTicket = async (formData: FormData) => {
     body: formData
   });
  
+  const data = await response.json();
   return {
-    ...response.json(),
+    ...data,
     status: response.status,  
   };
 }
 
-export const getTickets = async (filter: FileFilter) => {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/getPage`, {
+export const getTickets = async (filter: TicketFilter) => {
+  const queryParams = new URLSearchParams(Object.fromEntries(Object.entries(filter).map(([key, value]) => [key, String(value)])));
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/getPage?${queryParams.toString()}`, {
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(filter),
   });
 
+  const data = await response.json();
   return {
-    ...response.json(),
+    data,
     status: response.status,  
   };
 }
@@ -31,8 +30,9 @@ export const getSpecificTicket = async (id: string) => {
     credentials: "include",
   });
     
+  const data = await response.json();
   return {
-    ...response.json(),
+    ...data,
     status: response.status,  
   };
 }
@@ -42,19 +42,23 @@ export const getUserTickets = async () => {
     credentials: "include",
   });
  
+  const data = await response.json();
   return {
-    ...response.json(),
+    data,
     status: response.status,  
   };
 }
 
 export const deleteTicket = async (id: string) => {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/remove?${id}`, {
+  const queryParams = new URLSearchParams({ id });
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/remove?${queryParams.toString()}`, {
+    method: "DELETE",
     credentials: "include",
   });
    
+  const data = await response.json();
   return {
-    ...response.json(),
+    ...data,
     status: response.status,  
   };
 }
@@ -69,9 +73,9 @@ export const updateTicket = async (id: string, mods: Modifications ) => {
     body: JSON.stringify(mods),
   });
 
-
+  const data = await response.json();
   return {
-    ...response.json(),
+    ...data,
     status: response.status,  
   };
 }

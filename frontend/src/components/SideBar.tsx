@@ -4,11 +4,11 @@ export default function SideBar() {
   const tabs = [
     {
       title: "Tickets",
-      link: "/",
+      link: "/tickets?page=1",
     },
     {
       title: "Drive",
-      link: "/",
+      link: "/drive?page=1",
     },{
       title: "Members",
       link: "/",

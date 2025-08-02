@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfo } from "../api/AuthApi";
+import { useState } from "react";
 
 export default function Profile() {
   const [profile, setProfile] = useState(null); 
@@ -22,5 +23,6 @@ export default function Profile() {
     <div>Username: {data["username"]}</div>
     <div>Email: {data["email"]}</div>
     <div>Role: {data["role"]}</div>
+    <div>Password: {data["password"]}</div>
   </div>);
 }
