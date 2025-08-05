@@ -1,10 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfo } from "../api/AuthApi";
-import { useState } from "react";
 
-export default function Profile() {
-  const [profile, setProfile] = useState(null); 
-  
+export default function Profile() { 
   const { isPending, isError, data, error } = useQuery({
     queryKey: ['profile'],
     queryFn: getUserInfo,

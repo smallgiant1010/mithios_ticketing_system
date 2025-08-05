@@ -39,7 +39,7 @@ const accountSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please Mention Which Role You Hold"],
     enum: {
-      values: ["Programmer", "Artist", "Manager"],
+      values: ["Programmer", "Artist", "Manager", "Any"],
       message: "Please Assign Yourself A Role",
     },
   },

@@ -26,7 +26,7 @@ export const getTickets = async (filter: TicketFilter) => {
 }
 
 export const getSpecificTicket = async (id: string) => { 
-  const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/getSpecific?${id}`, {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/getSpecific?id=${id}`, {
     credentials: "include",
   });
     
@@ -63,7 +63,7 @@ export const deleteTicket = async (id: string) => {
   };
 }
 
-export const updateTicket = async (id: string, mods: Modifications ) => {
+export const updateTicket = async (id: string, mods: TicketDetails ) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/ticket/update?${id}`, {
     method: "PATCH",
     headers: {

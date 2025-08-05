@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, FormEvent } from 'react';
 import { postTicket } from "../api/TicketApi";
+import useDisplayContext from "../hooks/useDisplayContext";
 
 export default function TicketForm() {
   const queryClient = useQueryClient();
@@ -10,29 +11,37 @@ export default function TicketForm() {
     images: [] as File[],
     priority: 1,
     team: "Any",
+    resolved: false,
   });
-  const { mutate, data, isError, isPending, error } = useMutation({
+  const { mutateAsync, data, isPending } = useMutation({
     mutationFn: (formData: FormData) => postTicket(formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
     }
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const { dispatch } = useDisplayContext();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    
-    for(const [key, value] of Object.entries(ticketInfo)) {
-      if(key !== "images") {
-        formData.append(key, `${value}`);
-      } else {
-        for(const blob of key) {
-          formData.append(key, blob);  
-        }
-      }
-    };
+    const metadata = structuredClone(ticketInfo);
+    delete metadata.images;
+    ticketInfo.images.forEach((blob) => formData.append("images", blob)); 
+    formData.append("metadata", JSON.stringify(metadata));
+    await mutateAsync(formData);
 
-    mutate(formData);
+    if(data.status === 200) {
+      dispatch({ type: "DISMISS_TICKET_FORM" });
+      setTicketInfo({
+        title: "",
+        description: "",
+        images: [] as File[],
+        priority: 1,
+        team: "Any",
+        resolved: false,
+      });
+    }
   };
 
   return (<form onSubmit={handleSubmit} className="default-form-style">
@@ -62,7 +71,7 @@ export default function TicketForm() {
     </div>
     <div> 
       <label htmlFor="fImages" className="default-label-style">Screenshots</label>
-      <input type="file" value={ticketInfo.images} onChange={e => {
+      <input type="file" onChange={e => {
         if(e.target.files && e.target.files.length > 0) {
           const files = Array.from(e.target.files); 
           setTicketInfo(prev => ({...prev, images: [...prev.images, ...files]}));
@@ -70,6 +79,12 @@ export default function TicketForm() {
       }} className="default-file-style" />
       <span>{data && (Object.hasOwn(data, "image_str") ? data.image_str : "")}</span>
     </div>
-    <button type="submit" className="default-button-style">{isPending ? "Posting..." : "Post Ticket"}</button>
+
+    <div>
+      <button onClick={e => dispatch({ type: "DISMISS_TICKET_FORM" })}>
+        Cancel
+      </button>
+      <button type="submit" className="default-button-style">{isPending ? "Posting..." : "Post Ticket"}</button>
+    </div>
   </form>);
 }

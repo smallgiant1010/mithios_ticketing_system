@@ -12,7 +12,7 @@ const storage = new GridFsStorage({
     return new Promise((resolve, reject) => {
       // Encrypt with random bytes to avoid collisions
       let metadata = {}
-      crypto.randomBytes(16, (err, buffer) => {
+      crypto.randomBytes(4, (err, buffer) => {
         try {
           if(req.body?.metadata) metadata = JSON.parse(req.body.metadata);
         } catch(e) {
@@ -23,7 +23,7 @@ const storage = new GridFsStorage({
         if(err) return reject(err);
 
         // Hex creates a unique filename
-        const filename = buffer.toString("hex") + path.extname(file.originalname);
+        const filename = buffer.toString('hex') + "=" + file.originalname;
         resolve({
           filename,
           bucketName: "upload",

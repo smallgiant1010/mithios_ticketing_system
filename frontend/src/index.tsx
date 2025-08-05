@@ -5,6 +5,7 @@ import App from './App';
 import { AuthContextProvider } from './context/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DisplayContextProvider } from './context/DisplayContext';
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 const queryClient = new QueryClient();
 
@@ -14,11 +15,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthContextProvider>  
-        <DisplayContextProvider>
-          <App />
-        </DisplayContextProvider>
-      </AuthContextProvider>
+      <NuqsAdapter> 
+        <AuthContextProvider>  
+          <DisplayContextProvider>
+            <App />
+          </DisplayContextProvider>
+        </AuthContextProvider>
+      </NuqsAdapter>
     </QueryClientProvider>
   </React.StrictMode>
 );

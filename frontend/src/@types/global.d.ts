@@ -16,7 +16,7 @@ declare global {
   type TicketFilter = FileFilter & {
     sortType: string;
     order: number;
-    active: boolean;
+    resolved: boolean;
   }
 
   type Modifications = {
@@ -37,5 +37,20 @@ declare global {
     issued_user_id: string;
     createdAt: Date;
     image_str: [string];
+  }
+
+  type Metadata = {
+    _id: string;
+    length: number;
+    chunkSize: number;
+    uploadDate: Date;
+    filename: string;
+    contentType: string;
+    metadata: {
+      phase: string;
+      filename: string;
+      username: string;
+      user_id: string;
+    }
   }
 }

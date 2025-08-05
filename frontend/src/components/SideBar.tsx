@@ -11,7 +11,7 @@ export default function SideBar() {
       link: "/drive?page=1",
     },{
       title: "Members",
-      link: "/",
+      link: "/members",
     },{
       title: "Phases",
       link: "/",

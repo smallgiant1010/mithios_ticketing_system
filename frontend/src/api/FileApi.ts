@@ -1,3 +1,5 @@
+import fileDownload from 'react-file-download';
+
 export const getFiles = async (filter: FileFilter) => {
   const queryParams = new URLSearchParams(Object.fromEntries(Object.entries(filter).map(([key, value]) => [key, String(value)])));
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/file/files?${queryParams.toString()}`, {
@@ -6,7 +8,7 @@ export const getFiles = async (filter: FileFilter) => {
 
   const data = await response.json(); 
   return {
-    ...data,
+    files: data,
     status: response.status,  
   };
 }
@@ -38,10 +40,21 @@ export const deleteFile = async (id: string) => {
   };
 }
 
-export const downloadFile = async (fileName: string) => {
+export const downloadFile = async (fileName: string, metadataFilename: string) => {
   const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/file/download/${fileName}`, {
     credentials: "include",
   });
-
-  return {};
+  
+  if(response.ok) {
+    const fileBlob = await response.blob();
+    fileDownload(fileBlob, metadataFilename);
+    return {};
+  }
+  else {
+    const data = await response.json();
+    return {
+      ...data,
+      status: response.status,
+    }    
+  }
 }

@@ -8,6 +8,8 @@ import ResetPassword from "./components/ResetPassword";
 import ContentLayout from "./pages/ContentLayout";
 import Profile from "./components/Profile";
 import Tickets from "./components/Tickets";
+import Drive from "./components/Drive";
+import Members from "./components/Members";
 
 function App() {
   const user = localStorage.getItem("user");
@@ -23,9 +25,9 @@ function App() {
         </Route>
         <Route element={<ContentLayout />}>
           <Route path="/tickets" element={<Tickets />} />
-{/*          <Route path="/drive" element={<Drive />} />
+          <Route path="/drive" element={<Drive />} />
           <Route path="/members" element={<Members />} />
-          <Route path="/phases" element={<Phases />} />*/}
+ {/*         <Route path="/phases" element={<Phases />} />*/}
           <Route path="/profile" element={<Profile />} />
         </Route>
         {/* <Route path="*" element={<NotFound />}/> */}

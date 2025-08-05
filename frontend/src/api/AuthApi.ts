@@ -27,4 +27,12 @@ export const getUserInfo = async () => {
   };
 }
 
+export const getAllUsers = async () => {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/auth/users`, { credentials: "include" });
 
+  const data = await response.json();
+  return {
+    users: data,
+    status: response.status,
+  }
+}

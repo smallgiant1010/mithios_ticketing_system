@@ -13,19 +13,11 @@ import { useLogin } from '../hooks/useLogin';
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-//  const [errors, setErrors] = useState<CredentialData>({
-//    username: "",
-//    email: "",
-//    password: "",
-//    role: "",
-//  });
-  // const [loading, setLoading] = useState(false);
   const {login, errors, loading} = useLogin();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // setLoading(true);
     await login(username, password);
     if(!errors) {
       navigate("/profile");

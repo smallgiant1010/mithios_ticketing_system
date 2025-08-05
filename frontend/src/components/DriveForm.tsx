@@ -1,39 +1,59 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { postFiles } from "../api/FileApi";
 import useAuthContext from "../hooks/useAuthContext";
+import useDisplayContext from "../hooks/useDisplayContext";
 
 export default function DriveForm() {
-  const {username, id} = useAuthContext();
+  const { username, id } = useAuthContext(); 
   const queryClient = useQueryClient();
   const [metadata, setMetadata] = useState({
-    filename: "",
-    phase: "",
-    username,
-    user_id: id,
+    bundleName: "",
+    phase: "any",
+    username: "",
+    user_id: "",
   });
-  const [files, setFiles] = useState([]);
-  const { mutate, isPending, data } = useMutation({
+  const [files, setFiles] = useState<File[]>([]); 
+  useEffect(() => console.log(files), [files]);
+
+  const [fileError, setFileError] = useState("");
+  const { mutateAsync, isPending, data } = useMutation({
     mutationFn: (formData: FormData) => postFiles(formData),
     onSuccess: () => {
-      queryClient.invalidateQueries(["files"]);
+      queryClient.invalidateQueries({ queryKey: ["files"] });
     },
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    setMetadata(prev => {
+      if(prev.username === username && prev.user_id === id) return prev;
+      return { ...prev, username, user_id: id };
+    });
+    console.log("Updating metadata with:", username, id);
+  }, [username, id, setMetadata]);
+
+  const { dispatch } = useDisplayContext();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("filename", metadata.filename);
-    formData.append("phase", metadata.phase);
+    formData.append("metadata", JSON.stringify(metadata));
     for(const blob of files) {
       formData.append("files", blob);
     }
-    mutate(formData);
+    await mutateAsync(formData);
+    if(data.status === 200) {
+      dispatch({ type: "DISMISS_DRIVE_FORM" });
+    }
   }
 
   return (<form className="default-form-style" onSubmit={handleSubmit}>
-    <label htmlFor="fTitle" className="default-label-style">Title</label>
-    <input name="fTitle" type="text" className="default-field-style" value={metadata.filename} onChange={e => setMetadata(prev => ({ ...prev, filename: e.target.value }))}/>
+    <div>
+    <label htmlFor="fTitle" className="default-label-style">Name of File Bundle</label>
+    <input name="fTitle" type="text" className="default-field-style" value={metadata.bundleName} onChange={e => setMetadata(prev => ({ ...prev, bundleName: e.target.value }))}/>
+    </div>
+
+    <div>
     <label htmlFor="fPhase" className="default-label-style">Phase</label>
     <select name="fPhase" className="default-select-style" value={metadata.phase} onChange={e => setMetadata(prev => ({ ...prev, phase: e.target.value }))}>
       <option value="phase 1">Phase 1</option>
@@ -41,14 +61,26 @@ export default function DriveForm() {
       <option value="phase 3">Phase 3</option>
       <option value="any">Any Phase</option>
     </select>
+    </div>
+
+    <div>
     <label htmlFor="fileUploads">Files: </label>
-    <input type="file" className="default-file-style" value={files} onChange={e => {
-      if(e.target.files && e.target.files.length > 9) {
-        const files = Array.from(e.target.files);
-        setFiles(prev => ([...prev, ...files]));
+    <input type="file" className="default-file-style" onChange={e => {
+      if(e.target.files && e.target.files.length > 0) {
+        const newFiles = Array.from(e.target.files);
+        if(files.length + newFiles.length <= 10) setFiles(prev => ([...prev, ...newFiles]));
+        else setFileError("A maximum of 10 files are allowed at once.");
       }
-    }}
-    <button type="submit">{isPending ? "Uploading Files..." : "Upload Files"}</button>
-    <span>{data && (Object.hasOwn(data, "error") ? data["error"] : "")}</span>
+    }} />
+    <span>{fileError}</span>
+    </div>
+
+    <div>
+      <button onClick={e => dispatch({ type: "DISMISS_DRIVE_FORM" })}>
+        Cancel
+      </button>
+      <button type="submit">{isPending ? "Uploading Files..." : "Upload Files"}</button>
+      <span>{data && (Object.hasOwn(data, "error") ? data["error"] : "")}</span>
+    </div>
   </form>)
 }

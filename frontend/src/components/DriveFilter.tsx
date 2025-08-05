@@ -1,44 +1,40 @@
 import { getFiles } from "../api/FileApi";
 import { useQuery } from "@tanstack/react-query";
-import { useQueryState } from "nuqs";
-import { useState, FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { useQueryState, parseAsInteger } from "nuqs";
+import { useEffect } from "react";
+import { useDebounce } from "use-debounce";
 import FileCard from "./FileCard";
 
 export default function DriveFilter() {
-  const [page, setPage] = useQueryState("page", { default: 1 });
-  const [query, setQuery] = useQueryState("query", { default: "" });
-  const [applyFilters, setApplyFilters] = useState(true);
+  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+  const [query, setQuery] = useQueryState("query", { defaultValue: "" });
+  const [debouncedQuery] = useDebounce(query, 300);
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["files", query, page],
-    queryFn: () => getFiles({ query, page }),
-    enabled: applyFilters,
-    onSuccess: () => setApplyFilters(false),
+    queryKey: ["files", debouncedQuery, page],
+    queryFn: () => getFiles({ query: debouncedQuery , page }),
   });
 
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedQuery, setPage]);
+  
   if(isPending) {
     return <div>Loading Drive...</div>
   }
 
   if(isError) {
     return <div>Error: {error.message}</div>
-  }
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setApplyFilters(true);
-    setPage(1);
-  }
+  } 
 
   return (<div>
-    <form className="default-form-style" onSubmit={handleSubmit}>
+    <section>
       <label htmlFor="fQuery" className="default-label-style" >Search Keywords: </label>
-      <input type="text" className="default-field-style" value={query} onChange=(e => setQuery(e.target.value)} />
+      <input type="text" className="default-field-style" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search" />
       <button type="submit">Search</button>
-    </form>
-    {data?.length > 0 && data.map((metadata) => <FileCard key={metadata._id} data={metadata} />)}
-    <Link to={`?page=${page >= 2 ? page - 1 : page}`}>Previous Page</Link>
+    </section>
+    {data?.files && data.files.map((metadata: Metadata) => <FileCard key={metadata._id} data={metadata} />)}
+    <button onClick={e => setPage(p => p - 1)} disabled={page === 1}>Previous Page</button>
     <div>{page}</div>
-    <Link to={`?page=${data.length > (20 * page) ? page + 1 : page}`}>Next Page</Link>
+    <button onClick={e => setPage(p => p + 1)} disabled={!data?.files || data.files.length < 20}>Next Page</button>
   </div>)
 }

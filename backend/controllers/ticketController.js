@@ -60,12 +60,12 @@ const postCreateTicket = async (req, res) => {
 };
 
 const getPageOfTickets = async (req, res) => {
-  const { query, sortType, order, page, active } = req.query;
+  const { query, sortType, order, page, resolved } = req.query;
   try {
     const conditions = FIELDS.map((field) => ({
       [field]: { $regex: query, $options: "i" }
     }));
-    const tickets = await Ticket.find({ $and: [{ $or: conditions }, { resolved: active === "true" }]}, { image_str: 0, issued_user_id: 0, createdAt: 0 }).sort( { [sortType]: parseInt(order) } ).skip((parseInt(page) - 1) * 20).limit(20);
+    const tickets = await Ticket.find({ $and: [{ $or: conditions }, { resolved }]}, { image_str: 0, issued_user_id: 0, createdAt: 0 }).sort( { [sortType]: parseInt(order) } ).skip((parseInt(page) - 1) * 20).limit(20);
     res.status(200).json(tickets);
   } catch (err) {
     res.status(500).json({ error: err.message });

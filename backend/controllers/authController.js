@@ -54,7 +54,7 @@ const postLogin = async (req, res) => {
   try {
     const account = await Account.login(username, password);
     tokenHandler(account._id, account.username, res);
-    res.status(200).json({ id: account._id, username: account.username });
+    res.status(200).json({ id: account._id, username: account.username, role: account.role });
   } catch(err) {
     console.log(err);
     const errors = errorHandler(err);
@@ -67,7 +67,7 @@ const postSignup = async (req, res) => {
   try {
     const account = await Account.create(accountInfo);
     tokenHandler(account._id, account.username, res);
-    res.status(200).json({ id: account._id, username: account.username });
+    res.status(200).json({ id: account._id, username: account.username, role: account.role });
   } catch (err) {
     const errors = errorHandler(err);
     console.log(err.message);
@@ -85,7 +85,7 @@ const postLogout = (req, res) => {
   res.status(200).json({ id: _id });
 };
 
-const getUserInfo = (req, res) => {
+const getUserInfo = (_, res) => {
   const account = res.locals.user;
   if(!account) {
     res.status(404).json({ error: "User Account Not Found" });
@@ -93,6 +93,15 @@ const getUserInfo = (req, res) => {
     res.status(200).json({...account, password: "*".repeat(10)});
   }
 };
+
+const getAllUsers = async (_, res) => {
+  try {
+    const users = await Account.find({}, { username: 1, role: 1 });
+    return res.status(200).json({ users });
+  } catch(e) {
+    return res.status(500).json({ error: e.message });
+  }
+}
 
 const postResetPassword = (req, res) => {
   const { email } = req.query;
@@ -141,4 +150,4 @@ const patchNewPassword = async (req, res) => {
   }
 };
 
-module.exports = { postLogin, postLogout, getUserInfo, postSignup, postResetPassword, patchNewPassword };
+module.exports = { getAllUsers, postLogin, postLogout, getUserInfo, postSignup, postResetPassword, patchNewPassword };
