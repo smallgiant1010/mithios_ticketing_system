@@ -23,7 +23,7 @@ export default function MemberForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await mutateAsync(credentials);
-    if(data.status == 200) {
+    if(data.status === 200) {
       dispatch({ type: "DISMISS_MEMBER_FORM" });
     }
   }
@@ -60,7 +60,7 @@ export default function MemberForm() {
 
     <div>
       <button onClick={e => dispatch({ type: "DISMISS_MEMBER_FORM" })}>Cancel</button>
-      <button type="submit">Create User</button>
+      <button type="submit">{isPending ? "Signing Up User..." : "Create User"}</button>
     </div>
   </form>);
 }

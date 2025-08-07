@@ -32,7 +32,7 @@ export const getAllUsers = async () => {
 
   const data = await response.json();
   return {
-    users: data,
+    ...data,
     status: response.status,
   }
 }

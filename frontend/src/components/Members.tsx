@@ -22,7 +22,7 @@ export default function Members() {
     <button disabled={role !== "Manager"} onClick={e => dispatch({ type: "PREVIEW_MEMBER_FORM" })}>Add Member</button>
     {showMemberForm && <MemberForm />}
     {isPending ? <div>Loading Members...</div> : <>
-        {data.users.map((user: { _id: string, username: string, role: string }) => <MemberCard key={user._id} data={user}/>)}
+        {data["users"].map((user: { _id: string, username: string, role: string }) => <MemberCard key={user._id} data={user}/>)}
       </>
     }
   </div>);
