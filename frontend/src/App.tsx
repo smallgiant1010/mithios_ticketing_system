@@ -10,6 +10,8 @@ import Profile from "./components/Profile";
 import Tickets from "./components/Tickets";
 import Drive from "./components/Drive";
 import Members from "./components/Members";
+import Resources from "./components/Resources";
+import NotFound from "./components/NotFound";
 
 function App() {
   const user = localStorage.getItem("user");
@@ -27,10 +29,10 @@ function App() {
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/drive" element={<Drive />} />
           <Route path="/members" element={<Members />} />
- {/*         <Route path="/phases" element={<Phases />} />*/}
+          <Route path="/resources" element={<Resources />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
-        {/* <Route path="*" element={<NotFound />}/> */}
+        <Route path="*" element={<NotFound />}/>
       </Routes>
     </BrowserRouter>
   );

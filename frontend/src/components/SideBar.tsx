@@ -13,8 +13,8 @@ export default function SideBar() {
       title: "Members",
       link: "/members",
     },{
-      title: "Phases",
-      link: "/",
+      title: "Resources",
+      link: "/resources",
     },{
       title: "Profile",
       link: "/profile",

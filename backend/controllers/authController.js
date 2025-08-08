@@ -96,7 +96,7 @@ const getUserInfo = (_, res) => {
 
 const getAllUsers = async (_, res) => {
   try {
-    const users = await Account.find({}, { username: 1, role: 1 });
+    const users = await Account.find({}, { username: 1, role: 1, email: 1 });
     return res.status(200).json({ users });
   } catch(e) {
     return res.status(500).json({ error: e.message });
