@@ -1,0 +1,122 @@
+aside {
+    background-color: #282828;
+    height: 100vh;
+    border-right: 1px solid #8b8b8b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+main {
+    background-color: #3f3f3f;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.navlink {
+    width: 80%;
+    text-decoration: none;
+}
+
+.active {
+    border: 0px solid;
+    border-radius: 10px;
+    background-color: #f7b9cc;
+}
+
+.default-tab-style, .idle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5em;
+    border: 2px dotted #f29db8;
+    border-radius: 10px;
+}
+
+.default-tab-style:hover {
+    border: 2px solid #eb80a5;
+}
+
+.default-tab-style>div {
+    padding-left: 1em;
+    color: #f5abc2;
+}
+
+.active>div {
+    color: #eb80a5;
+}
+
+#profile-container {
+    height: 50vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.profile-card {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 2em;
+    border: 2px solid #eb80a5;
+    border-radius: 10px;
+    background-color: #282828;
+    color: #eb80a5;
+}
+
+.profile-card>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.logout-button {
+    height: 4em;
+}
+
+#member-list {
+    width: 100%;
+    display: flex;
+    overflow-y: hidden;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#member-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.member-form {
+    background-color: #282828;
+    margin-bottom: 1em;
+    border-radius: 5px;
+}
+
+.add-member-button {
+    position: sticky;
+}
+
+.dual-button-layout {
+    display: flex;
+    width: 50%;
+}
+
+#role-select {
+    margin-top: 1em;
+}
+
+#resources {
+    color: #eb80a5;
+}
+
+#resources a {
+    color: #f5abc2;
+}

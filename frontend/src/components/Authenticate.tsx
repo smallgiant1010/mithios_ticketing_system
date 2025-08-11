@@ -13,7 +13,7 @@ export default function Authenticate() {
     setLoading(true);
     try {
       const params = new URLSearchParams({ email });
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}?${params.toString()}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_PREFIX}/auth/authCode?${params.toString()}`, {
         method: "POST",
         credentials: "include",    
       });
@@ -30,10 +30,10 @@ export default function Authenticate() {
     }
   } 
 
-  return (<div>
-    <form onSubmit={handleSubmit}>
+  return (<div className='container'>
+    <form onSubmit={handleSubmit} className='default-form-style'>
       <div className="default-login-group">
-        <label htmlFor="fEmail" className="default-label-style">Recovery Email: </label>
+        <label htmlFor="fEmail" className="default-label-style">Recovery Email</label>
         <input type="email" name="fEmail" className="default-field-style" onChange={(e) => setEmail(e.target.value)} />
         <span>{error}</span>
         <button type="submit" className="default-button-style">

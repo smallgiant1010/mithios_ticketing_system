@@ -13,6 +13,7 @@ import { useLogin } from '../hooks/useLogin';
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const {login, errors, loading} = useLogin();
   const navigate = useNavigate();
 
@@ -24,25 +25,29 @@ export default function Login() {
     }
   };
 
-
-  return (<div>
+  return (<div className="container">
     <form onSubmit={handleSubmit} className="default-form-style">
       <div className="default-login-group">
-        <label htmlFor="fUser" className="default-label-style" >Username: </label>
-        <input name="fUser" type="text" className="default-field-style" onChange={(e) => setUsername(e.target.value)}/>
+        <label htmlFor="fUser" className="default-label-style" >Username</label>
+        <input name="fUser" value={username} type="text" className="default-field-style" onChange={(e) => setUsername(e.target.value)}/>
         <span>{errors ? errors["username"] : ""}</span>
       </div>
       <div className="default-login-group">
-        <label htmlFor="fPassword" className="default-label-style" >Password: </label>
-        <input name="fPassword" type="password" className="default-field-style" onChange={(e) => setPassword(e.target.value)}/>
+        <label htmlFor="fPassword" className="default-label-style" >Password</label>
+        <input name="fPassword" value={password} type={ showPassword ? "text" : "password" } className="default-field-style" onChange={(e) => setPassword(e.target.value)}/>
         <span>{errors ? errors["password"] : ""}</span>
+      </div>
+      <div id="showpass-group">
+        <input type="checkbox" checked={showPassword} onChange={e => setShowPassword(e.target.checked)}/>
+        <span>Show Password</span>
       </div>
       <button type="submit" className="default-button-style">
         {loading ? "Loggin In..." : "Login"}
       </button>
-    </form>
-    <Link to="/code" id="forgot-password-link">
-      I Forgot My Password
-    </Link>    
+
+      <Link to="/code" id="forgot-password-link" className="default-link-style">
+        I Forgot My Password
+      </Link>  
+    </form>  
   </div>)
 };

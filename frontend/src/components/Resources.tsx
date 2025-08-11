@@ -3,7 +3,7 @@ export default function Resources() {
   const lore = "https://docs.google.com/document/d/10ff7HvRVg5SO6sBKXUgbg-iImTy-GL4jCkuoKTA4riA/edit?tab=t.6sgg714b60sz#heading=h.skd13q9pu1a6";
   const figma = "https://www.figma.com/board/YIx5M2cXMHewxXpGIitcnM/Map-Blueprints?node-id=0-1&t=HT5aFQ1KIxCc7okK-1";
 
-  return (<div>
+  return (<div id="resources">
     <h1>Mithios Game Design Document</h1>
     <a href={gdd}>Project Mithios</a>
     <h1>Isseddra Lore</h1>
@@ -12,5 +12,18 @@ export default function Resources() {
     <a href={figma}>Figma</a>
     <br />
     <i>*Message A Manager If You Don't Have Access To One Of The Resources</i>
+
+    <h1>Attributions</h1>
+    <ol>
+      <li><a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by Freepik - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/files-and-folders" title="files and folders icons">Files and folders icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/ui" title="ui icons">Ui icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/seen" title="seen icons">Seen icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/file" title="file icons">File icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/paint-brush" title="paint brush icons">Paint brush icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/code" title="code icons">Code icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://www.flaticon.com/free-icons/about-me" title="about me icons">About me icons created by Royyan Wijaya - Flaticon</a></li>
+    </ol>
   </div>)
 }

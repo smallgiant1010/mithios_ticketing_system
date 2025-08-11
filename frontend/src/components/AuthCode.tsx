@@ -20,9 +20,9 @@ export default function AuthCode({ authCode, email }: { authCode: string, email:
     setLoading(false);
   };
 
-  return (<form onSubmit={checkAuth}>
+  return (<form onSubmit={checkAuth} className='default-form-style'>
       <div className="default-login-group">
-        <label htmlFor="fCode" className="default-label-style">Authentication Code: </label>
+        <label htmlFor="fCode" className="default-label-style">Authentication Code</label>
         <input type="text" name="fCode" className="default-field-style" onChange={(e) => setUserCode(e.target.value)} />
         <span>{error}</span>
         <button type="submit" className="default-button-style">

@@ -53,23 +53,25 @@ export default function ResetPassword() {
     }
   };
 
-  return (<form onSubmit={handleSubmit}>
-  <div className="default-login-group">
-    <label htmlFor="fPassword" className="default-label-style" >Password: </label>
-    <input name="fPassword" type="password" className="default-field-style" onChange={(e) => setPassword(e.target.value)}/>
-  <span>{errors["password"]}</span>
-  </div>
-  <div className="default-login-group">
-    <label htmlFor="fConfirmPassword" className="default-label-style" >Confirm Password: </label>
-    <input name="fConfirmPassword" type="password" className="default-field-style" onChange={(e) => {
-    setConfirmPassword(e.target.value);
-    setConfirmationError(e.target.value !== password ? "These Passwords Do Not Match" : "");
-    }}/>
-  <span>{confirmationError}</span>
-  </div>
+  return (<div className='container'>
+    <form onSubmit={handleSubmit} className='default-form-style'>
+    <div className="default-login-group">
+      <label htmlFor="fPassword" className="default-label-style" >Password</label>
+      <input name="fPassword" type="password" className="default-field-style" onChange={(e) => setPassword(e.target.value)}/>
+    <span>{errors["password"]}</span>
+    </div>
+    <div className="default-login-group">
+      <label htmlFor="fConfirmPassword" className="default-label-style" >Confirm Password</label>
+      <input name="fConfirmPassword" type="password" className="default-field-style" onChange={(e) => {
+      setConfirmPassword(e.target.value);
+      setConfirmationError(e.target.value !== password ? "These Passwords Do Not Match" : "");
+      }}/>
+    <span>{confirmationError}</span>
+    </div>
 
-  <button type="submit" className="default-button-style">
-    {loading ? "Finalizing Changes..." : "Reset"}
-  </button>
-  </form>)
+    <button type="submit" className="default-button-style">
+      {loading ? "Finalizing Changes..." : "Reset"}
+    </button>
+    </form>
+  </div>);
 };

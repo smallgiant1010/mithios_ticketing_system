@@ -1,5 +1,5 @@
-import React from 'react';
-import './styles/App.css';
+import './styles/Auth.css';
+import './styles/Content.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AuthLayout from "./pages/AuthLayout";
 import Login from "./components/Login";
