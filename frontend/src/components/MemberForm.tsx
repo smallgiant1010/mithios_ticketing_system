@@ -22,13 +22,13 @@ export default function MemberForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await mutateAsync(credentials);
-    if(data.status === 200) {
+    const response = await mutateAsync(credentials);
+    if(response && response.status === 200) {
       dispatch({ type: "DISMISS_MEMBER_FORM" });
     }
   }
 
-  return (<form onSubmit={handleSubmit} className="default-form-style member-form">
+  return (<form onSubmit={handleSubmit} className="default-form-style member-form modal-content">
     <div className="default-login-group">
       <label htmlFor="fUsername" className="default-label-style">Username: </label>
       <input className="default-field-style" type="text" name="fUsername" value={credentials.username} onChange={e => setCredentials(prev => ({ ...prev, username: e.target.value }))} /> 
@@ -47,7 +47,7 @@ export default function MemberForm() {
       <span>{data && data.password}</span>
     </div>
 
-    <div id="role-select">
+    <div id="role-select" className="default-login-group">
       <label className="default-label-style" htmlFor="fRole">Role: </label>
       <select name="fRole" value={credentials.role} onChange={e => setCredentials(prev => ({ ...prev, role: e.target.value }))}>
         <option value="Programmer">Programmer</option> 

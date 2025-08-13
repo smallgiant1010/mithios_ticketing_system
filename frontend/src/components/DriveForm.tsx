@@ -41,8 +41,8 @@ export default function DriveForm() {
     for(const blob of files) {
       formData.append("files", blob);
     }
-    await mutateAsync(formData);
-    if(data.status === 200) {
+    const response = await mutateAsync(formData);
+    if(response && response.status === 200) {
       dispatch({ type: "DISMISS_DRIVE_FORM" });
     }
   }

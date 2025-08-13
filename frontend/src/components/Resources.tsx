@@ -4,6 +4,7 @@ export default function Resources() {
   const figma = "https://www.figma.com/board/YIx5M2cXMHewxXpGIitcnM/Map-Blueprints?node-id=0-1&t=HT5aFQ1KIxCc7okK-1";
 
   return (<div id="resources">
+    <i style={{ marginTop: "1em" }}>*Message A Manager If You Don't Have Access To One Of The Resources</i>
     <h1>Mithios Game Design Document</h1>
     <a href={gdd}>Project Mithios</a>
     <h1>Isseddra Lore</h1>
@@ -11,7 +12,6 @@ export default function Resources() {
     <h1>Map Ideas</h1>
     <a href={figma}>Figma</a>
     <br />
-    <i>*Message A Manager If You Don't Have Access To One Of The Resources</i>
 
     <h1>Attributions</h1>
     <ol>
@@ -24,6 +24,7 @@ export default function Resources() {
       <li><a href="https://www.flaticon.com/free-icons/paint-brush" title="paint brush icons">Paint brush icons created by Royyan Wijaya - Flaticon</a></li>
       <li><a href="https://www.flaticon.com/free-icons/code" title="code icons">Code icons created by Royyan Wijaya - Flaticon</a></li>
       <li><a href="https://www.flaticon.com/free-icons/about-me" title="about me icons">About me icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a href="https://codepen.io/rustcode/pen/MYYMrVQ">Profile Card Neo Brutalism Using Html and Css By RustCode</a></li>
     </ol>
   </div>)
 }
