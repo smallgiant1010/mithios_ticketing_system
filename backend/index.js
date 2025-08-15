@@ -14,14 +14,14 @@ const app = express();
 const prefix = "/api/v1";
 
 // Connect To DB
-mongoose.connect(process.env.MONGO_URI).then(() => console.log("Connected To " + process.env.MONGO_URI));
+mongoose.connect(process.env.MONGO_URI);
 
 // Middleware
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: process.env.FRONTEND_DOMAIN,
   credentials: true,
 }));
 
@@ -32,6 +32,4 @@ app.use(prefix, ticketRouter);
 app.use(prefix, fileRouter);
 
 // Starting Express Server 
-app.listen(process.env.PORT, () => {
-  console.log(`Listening on PORT ${process.env.PORT}`);
-})
+app.listen(process.env.PORT);
