@@ -3,13 +3,6 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { useLogin } from '../hooks/useLogin';
 
-//type CredentialData = { 
-//  username: string, 
-//  email: string, 
-//  password: string, 
-//  role: string
-//}
-
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +13,7 @@ export default function Login() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await login(username, password);
-    if(!errors) {
+    if(localStorage.getItem("user")) {
       navigate("/profile");
     }
   };

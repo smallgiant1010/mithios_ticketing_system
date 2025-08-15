@@ -26,10 +26,13 @@ app.use(cors({
 }));
 
 // Routes
-app.head("/", (_, res) => res.status(200));
+app.head("/", (_, res) => res.sendStatus(200));
+app.get("/", (_, res) => res.send("Hello From Render"));
 app.use(prefix, authRouter);
 app.use(prefix, ticketRouter);
 app.use(prefix, fileRouter);
 
 // Starting Express Server 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => {
+  console.log(`Running On Port: ${process.env.PORT}`);
+});

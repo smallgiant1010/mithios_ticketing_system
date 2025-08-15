@@ -1,7 +1,7 @@
 import { getFiles } from "../api/FileApi";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryState, parseAsInteger } from "nuqs";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDebounce } from "use-debounce";
 import FileCard from "./FileCard";
 
