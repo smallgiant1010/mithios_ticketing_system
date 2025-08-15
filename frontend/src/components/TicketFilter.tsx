@@ -41,7 +41,7 @@ export default function TicketFilter() {
       </div>
       <input className="default-field-style searchBar" type="text" value={localQuery} onChange={e => setLocalQuery(e.target.value)} placeholder="Search Tickets..."/>
     </section>
-    <section id='tickets-layout'>
+    <section className='tickets-layout'>
       {isPending ? (<div>Loading Tickets...</div>) : data["data"]?.map((ticket: TicketPreview) => <TicketPreview key={ticket._id} data={ticket} />)}
     </section>
     <section className='page-counter'>

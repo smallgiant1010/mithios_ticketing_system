@@ -21,19 +21,20 @@ main {
 }
 
 .active {
-    border: 0px solid;
     border-radius: 10px;
-    background-color: #f7b9cc;
+    background-color: #f5abc2;
 }
 
-.default-tab-style,
-.idle {
+.default-tab-style {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding: 0.5em;
-    border: 2px dotted #f29db8;
     border-radius: 10px;
+}
+
+.idle {
+    border: 2px dotted #eb80a5;
 }
 
 .default-tab-style:hover {
@@ -181,16 +182,17 @@ main {
     width: 20%;
 }
 
-#tickets-layout {
+.tickets-layout {
     overflow-y: scroll;
     scrollbar-width: none;
     height: 60vh;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    gap: 0.6em;
 }
 
-#tickets-layout::-webkit-scrollbar {
+.tickets-layout::-webkit-scrollbar {
     width: 0;
     height: 0;
     display: none;
@@ -290,7 +292,7 @@ main {
 .image-preview {
     width: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
 }
 
@@ -311,11 +313,8 @@ main {
     height: 100%;
     background: #eb80a5;
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 1em;
     border-radius: 7px;
+    margin: 0.5em;
 }
 
 .upper-container {
@@ -372,4 +371,43 @@ main {
 
 .card-container:hover {
     border: 4px solid #f7b9cc;
+}
+
+#drive-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin-left: 0.5em;
+    background-color: #8b8b8b;
+    border-radius: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-headers {
+    display: flex;
+    flex-direction: column;
+    color: #e5e7eb;
+    align-items: center;
+}
+
+.file-info {
+    background-color: #3f3f3f;
+    color: #f3f4f6;
+    border: 2px dotted #121212;
+    border-radius: 1em;
+    padding-left: 0.5em;
+}
+
+.card-headers img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }

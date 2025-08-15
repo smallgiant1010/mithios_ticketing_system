@@ -65,7 +65,7 @@ const removeFile = async (req, res) => {
 const getPageOfFiles = async (req, res) => {
   const { query, page } = req.query;
   try {
-    const conditions = ["metadata.phase", "filename", "metadata.username", "metadata.user_id"].map(field => ({
+    const conditions = ["metadata.phase", "bundleName", "metadata.username", "metadata.user_id"].map(field => ({
       [field]: { $regex: query , $options: "i" }
     }));
     const cursor = gfs.find({ $or: conditions }).sort( { uploadDate: -1 } ).skip((parseInt(page) - 1) * 20).limit(20);

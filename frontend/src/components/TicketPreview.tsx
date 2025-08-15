@@ -23,6 +23,7 @@ export default function TicketPreview({ data }: { data: TicketPreview }) {
       <div className="upper-container">
         <div className="image-container">
           <img src={selectRole(team)} alt="team icon" />
+          <p>{team}</p>
         </div>
       </div>
 

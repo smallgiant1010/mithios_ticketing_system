@@ -6,9 +6,10 @@ export default function useSelectRole() {
         case "Programmer":
             return "/images/code.png";
         case "Manager":
+            return "/images/user.png";
         case "Any":
         default:
-            return "/images/user.png";
+            return "/images/member.png";
         }
     }
 

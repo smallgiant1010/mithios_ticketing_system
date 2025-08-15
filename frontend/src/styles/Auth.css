@@ -124,3 +124,7 @@ span {
   color: #f5abc2;
 }
 
+.default-range-style {
+  cursor: pointer;
+}
+

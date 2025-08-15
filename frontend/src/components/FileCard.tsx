@@ -26,15 +26,22 @@ export default function FileCard({ data }: { data: Metadata }) {
     };
   }
 
-  return (<article>
+  return (<article className="file-card">
     <span>{isError ? error.message : ""}</span>
-    {Object.entries(data).map(([key, value], idx) => (
-      <div key={idx}>
-        {key} - {String(value)}
-      </div>)
-    )}
-    <button onClick={handleDownload}>Download File</button>
+    <div className="card-headers">
+      <img src="/images/file.png" alt="file icon"/>
+      <h3>{data.metadata.username}</h3>
+    </div>
+    <div className="file-info">
+      <p>File Name: {data.filename.split("=")[1]}</p>
+      <p>Phase Correlation: {data.metadata.phase}</p>
+      <p>Bundle Name: {data.metadata.bundleName}</p>
+      <p>Uploaded At: {data.uploadDate.toString()}</p>
+    </div>
+    <div className="dual-button-layout">
+      <button className="default-button-style" onClick={handleDownload}>Download File</button>
+      <button className="default-button-style" onClick={handleRemoval} disabled={data && (id !== data.metadata.user_id)}>{removalPending ?"Deleting File" :"Remove File"}</button>
+    </div>
     <span>{fileDownloadError}</span>
-    <button onClick={handleRemoval} disabled={data && (id !== data.metadata.user_id)}>{removalPending ?"Deleting File" :"Remove File"}</button>
   </article>);
 }

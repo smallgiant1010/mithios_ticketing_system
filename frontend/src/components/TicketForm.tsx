@@ -65,14 +65,14 @@ export default function TicketForm() {
       <span>{data && (Object.hasOwn(data, "team") ? data.team : "")}</span>
     </div>
     <div className='default-login-group'>
-      <label htmlFor="fPriority" className="default-label-style">Priority</label>
+      <label htmlFor="fPriority" className="default-label-style">Priority: {ticketInfo.priority}</label>
       <input type="range" min="1" max="5" value={ticketInfo.priority} onChange={e => setTicketInfo(prev => ({...prev, priority: Number(e.target.value)}))} className="default-range-style" />   
       <span>{data && (Object.hasOwn(data, "priority") ? data.priority : "")}</span>
     </div>
     <div className='file-uploader'> 
       <label htmlFor="fImages" className="default-label-style file-upload-label">
         Upload Screenshots (2 MAX)
-        <input id="fImages" multiple type="file" onChange={e => {
+        <input id="fImages" multiple type="file" key={ticketInfo.images.length} onChange={e => {
           if(e.target.files && e.target.files.length > 0) {
             const files = Array.from(e.target.files); 
             setTicketInfo(prev => ({...prev, images: [...prev.images, ...files]}));
@@ -85,7 +85,7 @@ export default function TicketForm() {
           {ticketInfo?.images.map((image, idx) => (
             <li className="file-item" key={idx}>
               <span>{image.name}</span>
-              <button className="default-button-style list-buttons" onChange={e => setTicketInfo(prev => ({ ...prev, images: prev.images.filter((_, i) => i !== idx )}))}>
+              <button type="button" className="default-button-style list-buttons" onClick={e => setTicketInfo(prev => ({ ...prev, images: prev.images.filter((_, i) => i !== idx )}))}>
                 X
               </button>
             </li>

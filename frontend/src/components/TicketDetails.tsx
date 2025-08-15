@@ -60,7 +60,7 @@ export default function TicketFullDetails({ _id }: { _id: string }) {
       </div>
       
       <div className='default-login-group'>
-        <label htmlFor="fPriority" className="default-label-style">Priority</label>
+        <label htmlFor="fPriority" className="default-label-style">Priority: {details.priority}</label>
         <input className="default-range-style" name="fPriority" type="range" min="1" max="5" value={details.priority} onChange={e => setDetails(prev => ({ ...prev, priority: Number(e.target.value) }))}/>
         <span>{mutationErrorData && (Object.hasOwn(mutationErrorData, "priority") ? mutationErrorData.priority : "")}</span>
       </div>

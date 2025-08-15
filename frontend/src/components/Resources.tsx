@@ -25,6 +25,7 @@ export default function Resources() {
       <li><a href="https://www.flaticon.com/free-icons/code" title="code icons">Code icons created by Royyan Wijaya - Flaticon</a></li>
       <li><a href="https://www.flaticon.com/free-icons/about-me" title="about me icons">About me icons created by Royyan Wijaya - Flaticon</a></li>
       <li><a href="https://codepen.io/rustcode/pen/MYYMrVQ">Profile Card Neo Brutalism Using Html and Css By RustCode</a></li>
+      <li><a href="https://colorffy.com/dark-theme-generator?colors=eb80a5-121212">Pink And Black Theme</a></li>
     </ol>
   </div>)
 }

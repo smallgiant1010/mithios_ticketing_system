@@ -48,7 +48,7 @@ declare global {
     contentType: string;
     metadata: {
       phase: string;
-      filename: string;
+      bundleName: string;
       username: string;
       user_id: string;
     }
