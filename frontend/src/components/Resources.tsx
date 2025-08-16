@@ -6,26 +6,26 @@ export default function Resources() {
   return (<div id="resources">
     <i style={{ marginTop: "1em" }}>*Message A Manager If You Don't Have Access To One Of The Resources</i>
     <h1>Mithios Game Design Document</h1>
-    <a href={gdd}>Project Mithios</a>
+    <a target="_blank" href={gdd}>Project Mithios</a>
     <h1>Iseddra Lore</h1>
-    <a href={lore}>IPAD</a>
+    <a target="_blank" href={lore}>IPAD</a>
     <h1>Map Ideas</h1>
-    <a href={figma}>Figma</a>
+    <a target="_blank" href={figma}>Figma</a>
     <br />
 
     <h1>Attributions</h1>
     <ol>
-      <li><a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by Freepik - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/files-and-folders" title="files and folders icons">Files and folders icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/ui" title="ui icons">Ui icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/seen" title="seen icons">Seen icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/file" title="file icons">File icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/paint-brush" title="paint brush icons">Paint brush icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/code" title="code icons">Code icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://www.flaticon.com/free-icons/about-me" title="about me icons">About me icons created by Royyan Wijaya - Flaticon</a></li>
-      <li><a href="https://codepen.io/rustcode/pen/MYYMrVQ">Profile Card Neo Brutalism Using Html and Css By RustCode</a></li>
-      <li><a href="https://colorffy.com/dark-theme-generator?colors=eb80a5-121212">Pink And Black Theme</a></li>
-    </ol>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by Freepik - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/files-and-folders" title="files and folders icons">Files and folders icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/ui" title="ui icons">Ui icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/seen" title="seen icons">Seen icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/file" title="file icons">File icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/paint-brush" title="paint brush icons">Paint brush icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/code" title="code icons">Code icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://www.flaticon.com/free-icons/about-me" title="about me icons">About me icons created by Royyan Wijaya - Flaticon</a></li>
+      <li><a target="_blank" href="https://codepen.io/rustcode/pen/MYYMrVQ">Profile Card Neo Brutalism Using Html and Css By RustCode</a></li>
+      <li><a target="_blank" href="https://colorffy.com/dark-theme-generator?colors=eb80a5-121212">Pink And Black Theme</a></li>
+    </ol>target="_blank" 
   </div>)
 }
