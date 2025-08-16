@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfo } from "../api/AuthApi";
 import useLogout from "../hooks/useLogout";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSelectRole from "../hooks/useSelectRole";
 
 export default function Profile() { 
-  const { isPending, isError, data, error } = useQuery({
+  const { isPending, data} = useQuery({
     queryKey: ['profile'],
     queryFn: getUserInfo,
   });
@@ -17,12 +17,14 @@ export default function Profile() {
 
   const { selectRole } = useSelectRole();
 
+  useEffect(() => {
+    if(data && data.status > 200) {
+      navigate("/login");
+    }
+  }, [data, navigate])
+
   if(isPending) {
     return <div>Loading User Profile...</div>;
-  }
-
-  if(isError) {
-    return <div>Error: {error.message}</div>;
   }
 
   const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
