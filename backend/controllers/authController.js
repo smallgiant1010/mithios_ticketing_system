@@ -67,7 +67,6 @@ const postSignup = async (req, res) => {
   const accountInfo = req.body;
   try {
     const account = await Account.create(accountInfo);
-    tokenHandler(account._id, account.username, res);
     res.status(200).json({ id: account._id, username: account.username, role: account.role });
   } catch (err) {
     const errors = errorHandler(err);
