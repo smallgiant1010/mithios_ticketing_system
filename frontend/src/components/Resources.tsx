@@ -7,7 +7,7 @@ export default function Resources() {
     <i style={{ marginTop: "1em" }}>*Message A Manager If You Don't Have Access To One Of The Resources</i>
     <h1>Mithios Game Design Document</h1>
     <a href={gdd}>Project Mithios</a>
-    <h1>Isseddra Lore</h1>
+    <h1>Iseddra Lore</h1>
     <a href={lore}>IPAD</a>
     <h1>Map Ideas</h1>
     <a href={figma}>Figma</a>
