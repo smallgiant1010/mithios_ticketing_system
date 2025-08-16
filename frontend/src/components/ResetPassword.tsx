@@ -42,7 +42,7 @@ export default function ResetPassword() {
       
       const data = await response.json();
       if(response.status > 200) {
-        setErrors(prev => data);
+        setErrors(data);
       } else {
         navigate("/login");
       }
