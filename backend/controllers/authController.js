@@ -46,6 +46,7 @@ const tokenHandler = (id, username, res) => {
     maxAge: MAXAGE,
     httpOnly: true,
     secure: true,
+    sameSite: "none",
   });
 }
 
