@@ -37,4 +37,6 @@ app.use(prefix, fileRouter);
 // Starting Express Server 
 app.listen(process.env.PORT, () => {
   console.log(`Running On Port: ${process.env.PORT}`);
+  console.log(process.env.FRONTEND_DOMAIN);
+  console.log(process.env.SECRET);
 });
