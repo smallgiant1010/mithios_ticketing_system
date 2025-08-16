@@ -43,8 +43,6 @@ const downloadFile = (req, res) => {
 
   res.set('Content-Type', 'application/octet-stream');
   res.set('Content-Disposition', `attachment; filename="${fileName}"`);
-  
-  console.log("Response headers before piping: ", res.getHeaders());
   downloadStream.pipe(res);
 }
 
