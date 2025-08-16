@@ -11,6 +11,7 @@ const requireAuth = async (req, res, next) => {
         res.locals.user = null;
         res.status(500).json({ error: err.message });
       } else {
+        console.log(decoded.id);
         const account = await Account.findById(decoded.id, "_id username email role").lean();
         res.locals.user = account;
         next();

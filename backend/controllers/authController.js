@@ -105,7 +105,6 @@ const getAllUsers = async (_, res) => {
 
 const postResetPassword = (req, res) => {
   const { email } = req.query;
-  console.log(email);
   const randomCode = Math.floor(Math.random() * (MAXCODE - MINCODE + 1) + MINCODE);
   const transporter = nodemailer.createTransport({
     service: process.env.SERVICE,
